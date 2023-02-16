@@ -13,43 +13,37 @@ namespace EzxApplicationSettings.Controllers
             _ezxApplicationSettings = ezxApplicationSettings;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateApplicationSettingst([FromBody] ApplicationSettings ApplicationSettingst)
+        public async Task<ApplicationSettings> CreateApplicationSettingst([FromBody] ApplicationSettings applicationSettingst)
         {
 
-            var createResult = await _ezxApplicationSettings.CreateApplicationSettings(ApplicationSettingst);
-            return Ok(createResult);
+            var createResult = await _ezxApplicationSettings.CreateApplicationSettings(applicationSettingst);
+            return createResult;
 
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllApplicationSettings()
+        public async Task<List<ApplicationSettings>> GetAllApplicationSettings()
         {
-            var result = await _ezxApplicationSettings.GetAllApplicationSettings();
-            return Ok(result);
+            return await _ezxApplicationSettings.GetAllApplicationSettings();
         }
 
         [HttpGet("id")]
-        public async Task<IActionResult> GetApplicationSettingstId(string id)
+        public async Task<ApplicationSettings> GetApplicationSettingstId(string id)
         {
-            var result = await _ezxApplicationSettings.GetApplicationSettingsId(id);
-            return Ok(result);
+            return await _ezxApplicationSettings.GetApplicationSettingsId(id);
         }
-
-
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateApplicationSettingst([FromBody] ApplicationSettings applicationSettings)
+        public async Task<ApplicationSettings> UpdateApplicationSettingst([FromBody] ApplicationSettings applicationSettings)
         {
 
-            var result = await _ezxApplicationSettings.UpdateApplicationSettings(applicationSettings);
-            return Ok(result);
+            return await _ezxApplicationSettings.UpdateApplicationSettings(applicationSettings);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteApplicationSettingst(string id)
+        public async Task<string> DeleteApplicationSettingst(string id)
         {
-            await _ezxApplicationSettings.DeleteApplicationSettings(id);
-            return NoContent();
+            return await _ezxApplicationSettings.DeleteApplicationSettings(id);
         }
     }
 }
