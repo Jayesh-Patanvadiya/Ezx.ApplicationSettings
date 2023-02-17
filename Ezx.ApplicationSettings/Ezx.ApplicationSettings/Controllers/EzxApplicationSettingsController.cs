@@ -1,5 +1,4 @@
-﻿using AppSettingWrapper;
-using Ezx.ApplicationSettings.Services;
+﻿using Ezx.ApplicationSettings.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EzxApplicationSettings.Controllers
