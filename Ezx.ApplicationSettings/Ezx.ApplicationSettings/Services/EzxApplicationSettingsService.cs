@@ -20,15 +20,15 @@ namespace Ezx.ApplicationSettings.Services
 
 
 
-        public async Task<ApplicationSettings> CreateApplicationSettings(ApplicationSettings applicationSettings)
+        public async Task<ApplicationSettings> CreateApplicationSetting(ApplicationSettings applicationSetting)
         {
             try
             {
                 CollectionReference colRef = fireStoreDb.Collection("ezx.applicationsettings");
-                var result = await colRef.AddAsync(applicationSettings);
+                var result = await colRef.AddAsync(applicationSetting);
 
-                applicationSettings.Id = result.Id;
-                return applicationSettings;
+                applicationSetting.Id = result.Id;
+                return applicationSetting;
 
             }
             catch (Exception ex)
@@ -59,18 +59,18 @@ namespace Ezx.ApplicationSettings.Services
 
         }
 
-        public async Task<ApplicationSettings> UpdateApplicationSettings(ApplicationSettings applicationSettings)
+        public async Task<ApplicationSettings> UpdateApplicationSetting(ApplicationSettings applicationSettings)
         {
             DocumentReference ezApplicationSettings = fireStoreDb.Collection("ezx.applicationsettings").Document(applicationSettings.Id);
             await ezApplicationSettings.SetAsync(applicationSettings, SetOptions.Overwrite);
             return applicationSettings;
 
         }
-        public async Task<ApplicationSettings> GetApplicationSettingsId(string id)
+        public async Task<ApplicationSettings> GetApplicationSettingId(string appsettingid)
         {
             try
             {
-                DocumentReference docRef = fireStoreDb.Collection("ezx.applicationsettings").Document(id);
+                DocumentReference docRef = fireStoreDb.Collection("ezx.applicationsettings").Document(appsettingid);
                 DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
 
                 if (snapshot.Exists)
@@ -91,11 +91,11 @@ namespace Ezx.ApplicationSettings.Services
             }
 
         }
-        public async Task<string> DeleteApplicationSettings(string id)
+        public async Task<string> DeleteApplicationSetting(string appSettingId)
         {
             try
             {
-                DocumentReference ezApplicationSettings = fireStoreDb.Collection("ezx.applicationsettings").Document(id);
+                DocumentReference ezApplicationSettings = fireStoreDb.Collection("ezx.applicationsettings").Document(appSettingId);
                 await ezApplicationSettings.DeleteAsync();
                 return "Deleted Successfully!";
             }

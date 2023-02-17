@@ -1,9 +1,10 @@
-﻿using Ezx.ApplicationSettings.Services;
+﻿using AppSettingWrapper;
+using Ezx.ApplicationSettings.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EzxApplicationSettings.Controllers
 {
-    [Route("api/Ezx.ApplicationSettings")]
+    [Route("api/AppSetting")]
     [ApiController]
     public class EzxApplicationSettings : ControllerBase
     {
@@ -13,10 +14,9 @@ namespace EzxApplicationSettings.Controllers
             _ezxApplicationSettings = ezxApplicationSettings;
         }
         [HttpPost]
-        public async Task<ApplicationSettings> CreateApplicationSettingst([FromBody] ApplicationSettings applicationSettingst)
+        public async Task<ApplicationSettings> CreateApplicationSettings([FromBody] ApplicationSettings applicationSetting)
         {
-
-            var createResult = await _ezxApplicationSettings.CreateApplicationSettings(applicationSettingst);
+            var createResult = await _ezxApplicationSettings.CreateApplicationSetting(applicationSetting);
             return createResult;
 
         }
@@ -26,24 +26,24 @@ namespace EzxApplicationSettings.Controllers
             return await _ezxApplicationSettings.GetAllApplicationSettings();
         }
 
-        [HttpGet("id")]
-        public async Task<ApplicationSettings> GetApplicationSettingstId(string id)
+        [HttpGet("appsettingid")]
+        public async Task<ApplicationSettings> GetApplicationSettingId(string appsettingid)
         {
-            return await _ezxApplicationSettings.GetApplicationSettingsId(id);
+            return await _ezxApplicationSettings.GetApplicationSettingId(appsettingid);
         }
 
 
         [HttpPut]
-        public async Task<ApplicationSettings> UpdateApplicationSettingst([FromBody] ApplicationSettings applicationSettings)
+        public async Task<ApplicationSettings> UpdateApplicationSetting([FromBody] ApplicationSettings applicationSetting)
         {
 
-            return await _ezxApplicationSettings.UpdateApplicationSettings(applicationSettings);
+            return await _ezxApplicationSettings.UpdateApplicationSetting(applicationSetting);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<string> DeleteApplicationSettingst(string id)
+        [HttpDelete]
+        public async Task<string> DeleteApplicationSettingst(string appsettingid)
         {
-            return await _ezxApplicationSettings.DeleteApplicationSettings(id);
+            return await _ezxApplicationSettings.DeleteApplicationSetting(appsettingid);
         }
     }
 }

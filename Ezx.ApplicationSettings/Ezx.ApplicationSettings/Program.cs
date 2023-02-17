@@ -1,5 +1,9 @@
+
+//using AppSettingWrapper;
+//using AppSettingWrapper.HttpClient;
 using Ezx.ApplicationSettings.Services;
 using EzxApplicationSettings.Controllers;
+using Google.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +13,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IEzxApplicationSettingsService, EzxApplicationSettingsService>();
+builder.Services.AddSingleton<IEzxApplicationSettingsService, EzxApplicationSettingsService>();
+//builder.Services.AddSingleton<IAppSettingAPIAccess, AppSettingAPIAccess>();
+//builder.Services.AddSingleton<IHttpClientAppSetting, HttpClientAppSetting>();
+
+builder.Services.AddMemoryCache(); // Add this line for .NET 2.1
 
 var app = builder.Build();
 
