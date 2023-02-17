@@ -41,7 +41,8 @@ namespace AppSettingWrapper
             try
             {
                 //if cache data is available
-                if (_cache.TryGetValue(appSettingCacheKey, out List<ApplicationSetting> appSetting))
+                var checkCache = _cache.TryGetValue(appSettingCacheKey, out List<ApplicationSetting> appSetting);
+                if (checkCache && appSetting != null)
                 {
                     _logger.Log(LogLevel.Information, "App Settings  found in cache.");
                     return appSetting;
